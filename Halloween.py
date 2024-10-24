@@ -18,8 +18,9 @@ blood = (117,18,0)
 joker = (94,6, 143)
 joke = (0,133,0)
 ora = (136, 62, 0)
+white = (255,255,255)
 
-color_list = [blood, joke, joker, ora]
+color_list = [joke, joker, ora]
 def fade_in(color):
     red_rat = color[0] / 50
     red_org = color[0]
@@ -51,8 +52,49 @@ def fadeout(color):
      np.fill((red,green,blue))
      np.show()
      time.sleep(.05)
+
+def lightning(color):
+    np.fill(color)
+    np.show()
+    time.sleep(random.randint(3,5))
+    for i in range(random.randint(4,5)):
+        np.fill((255,255,255))
+        np.show()
+        time.sleep(random.randint(3,5)/100)
+        np.fill(color)
+        np.show()
+        time.sleep(random.randint(3,5)/100)
+
+def sparkl(back = purple, rg = joker, delay = 0.7, spark = 4):
+    for i in range(spark):
+        what = random.randint(0,29)
+        who = random.randint(0,29)
+        why = random.randint(0,29)
+        np.fill(back)
+        np[what] = rg
+        np[who] = rg
+        np[why] = rg
+        np.show()
+        time.sleep(delay)
+def chase(color, hold = 0.1):
+    count = 0
+    for i in range(np.n):
+        np.fill(color)
+    for i in range(np.n):
+        if (i + count) % 3 == 0:
+            np[i] = (0,0,0)
+                
+        time.sleep(hold)
+        np.show()
+        count += 2
+
+
+
+
 while True:
     rando = random.choice(color_list)
-    fade_in(rando)
-    fadeout(rando)
-
+    chase(rando)
+    fadeout(joker)
+    fade_in(orange)
+    sparkl()
+    lightning(rando)
